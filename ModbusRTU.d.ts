@@ -2,6 +2,7 @@ import { Socket } from 'net';
 
 export class ModbusRTU {
   constructor(port?: any);
+  static TestPort: TestPort;
 
   open(callback: Function): void;
   close(callback: Function): void;
@@ -93,7 +94,7 @@ export interface WriteMultipleResult {
   length: number;
 }
 
-export interface ReadDeviceIdentificationResult { 
+export interface ReadDeviceIdentificationResult {
   data: string[];
   conformityLevel: number;
 }
@@ -144,4 +145,11 @@ export interface TelnetPortOptions {
 
 export interface C701PortOptions {
   port?: number;
+}
+
+export interface TestPort extends NodeJS.EventEmitter {
+  isOpen(): boolean;
+  open(callback: Function): void;
+  close(callback: Function): void;
+  write(data: Buffer): void;
 }
